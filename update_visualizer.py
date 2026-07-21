@@ -7,7 +7,8 @@ dash_app = Dash(__name__)
 df = pd.read_csv("./merged_data.csv")
 df = df.sort_values("Date")
 
-dash_app.layout = html.Div([
+dash_app.layout = html.Div(
+    [
     html.H1("Welcome to Dash"),
    
     dcc.RadioItems(
@@ -16,9 +17,16 @@ dash_app.layout = html.Div([
         id='input_vals',
         inline=True
     ),
-
-     dcc.Graph(id="visualiser"),
-])
+    html.Div(
+        [dcc.Graph(id="visualiser"),],      
+    )
+    ],
+    style={
+            "backgroundColor": "pink",
+            "minHeight": "100vh",
+            "padding": "20px"
+            }
+    )
 
 @callback(
     Output("visualiser", "figure"),
