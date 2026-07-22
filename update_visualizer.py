@@ -9,13 +9,14 @@ df = df.sort_values("Date")
 
 dash_app.layout = html.Div(
     [
-    html.H1("Welcome to Dash"),
+    html.H1("Welcome to Dash",id="header"),
    
     dcc.RadioItems(
         options=['north', 'south', 'east', 'west', 'all'],
         value='north',
-        id='input_vals',
-        inline=True
+        id='region-picker',
+        inline=True,
+        
     ),
     html.Div(
         [dcc.Graph(id="visualiser"),],      
@@ -30,7 +31,7 @@ dash_app.layout = html.Div(
 
 @callback(
     Output("visualiser", "figure"),
-    Input("input_vals", "value")
+    Input("region-picker", "value")
 )
 def update_graph(region):
     if region == "all":
